@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para la mamina 💗</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffd1dc, #ff9bb3, #ffb6c1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #4a3b32;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Pantalla de Bienvenida (Carta/Sobre inicial) */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 400px;
+            padding: 35px 25px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            animation: popUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid #ffccd5;
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .welcome-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(255, 117, 140, 0.4);
+        }
+
+        .welcome-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: #fff;
+        }
+
+        .welcome-subtitle-top {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e63946;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome-card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #2b2b2b;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .welcome-card p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .open-btn {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 65, 108, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .open-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 65, 108, 0.6);
+        }
+
+        /* Contenido Principal de la Tarjeta */
+        .main-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 10;
+        }
+
+        .card-box {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            color: #d90429;
+            margin-bottom: 10px;
+        }
+
+        .music-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #fff0f3;
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+            border: 1px solid #ffccd5;
+        }
+
+        .music-bar span {
+            font-size: 0.85rem;
+            color: #d90429;
+            font-weight: 500;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 250px;
+            height: 35px;
+        }
+
+        /* Estilos de secciones internas */
+        .love-note {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+        }
+
+        .interactive-sections {
+            display: grid;
+            gap: 15px;
+        }
+
+        .accordion-btn {
+            background: #fff;
+            border: 2px solid #ffb6c1;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #d90429;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-btn:hover {
+            background: #fff0f3;
+        }
+
+        .accordion-content {
+            background: #fff0f3;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            border-radius: 0 0 15px 15px;
+            padding: 0 20px;
+            text-align: left;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .accordion-content.active {
+            max-height: 200px;
+            padding: 15px 20px;
+            border: 2px solid #ffb6c1;
+            border-top: none;
+        }
+
+        /* Cupones de regalo */
+        .coupons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .coupon {
+            background: linear-gradient(135deg, #fff, #ffe5ec);
+            border: 2px dashed #ff758c;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .coupon:hover {
+            transform: scale(1.03);
+        }
+
+        .coupon h4 {
+            font-size: 0.9rem;
+            color: #d90429;
+            margin-bottom: 5px;
+        }
+
+        .coupon p {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        /* Pétalos flotantes animados */
+        .petal {
+            position: absolute;
+            background: #ff758c;
+            border-radius: 150% 0 150% 0;
+            animation: fall linear infinite;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de bienvenida (Carta inicial) -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-card">
+            <div class="welcome-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div class="welcome-subtitle-top">Un regalo con todo mi amor</div>
+            <h2>Para la mamina 💗</h2>
+            <p>Preparé esto para recordarte cuánto te quiero y agradecerte por todo.</p>
+            <button class="open-btn" onclick="openCard()">Abrir mensaje especial 🤍</button>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-container">
+        <div class="card-box">
+            <div class="music-bar">
+                <span>🎵 El Plan de la Mariposa - El túnel de la vida</span>
+            </div>
+            
+            <!-- Reproductor de audio con la canción solicitada -->
+            <audio id="bgMusic" loop>
+                <source src="https://archive.org/download/el-plan-de-la-mariposa-el-tunel-de-la-vida/El%20Tunel%20De%20La%20Vida.mp3" type="audio/mpeg">
+                Tu navegador no soporta audio.
+            </audio>
+
+            <h1>¡Feliz Día, Mamina!</h1>
+            <p class="love-note">
+                Gracias por tus abrazos que curan todo, por tu paciencia infinita y por ser el corazón de nuestra familia. Sos la persona más maravillosa del mundo.
+            </p>
+        </div>
+
+        <!-- Secciones Interactivas / Mensajes -->
+        <div class="card-box">
+            <h3 style="margin-bottom: 15px; color: #d90429;">Pequeños sobres sorpresa 💌</h3>
+            <div class="interactive-sections">
+                <div>
+                    <button class="accordion-btn" onclick="toggleAccordion(this)"><span>✨ Una razón para amarte</span> <span>▼</span></button>
+                    <div class="accordion-content">
+                        Porque siempre encontrás la manera de sacarme una sonrisa incluso en los días más grises.
+                    </div>
+                </div>
+                <div>
+                    <button class="accordion-btn" onclick="toggleAccordion(this)"><span>🌟 Mi recuerdo favorito</span> <span>▼</span></button>
+                    <div class="accordion-content">
+                        Todas nuestras charlas merendando y riéndonos de cosas simples. No lo cambio por nada.
+                    </div>
+                </div>
+                <div>
+                    <button class="accordion-btn" onclick="toggleAccordion(this)"><span>💖 Un deseo para vos</span> <span>▼</span></button>
+                    <div class="accordion-content">
+                        Que la vida te devuelva el doble de todo el amor hermoso que nos das todos los días.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cupones interactivos -->
+        <div class="card-box">
+            <h3 style="margin-bottom: 5px; color: #d90429;">Vales especiales para Mamá</h3>
+            <p style="font-size: 0.85rem; color: #777; margin-bottom: 15px;">Toca un cupón para canjearlo</p>
+            <div class="coupons-grid">
+                <div class="coupon" onclick="redeemCoupon(this)">
+                    <h4>☕ Desayuno</h4>
+                    <p>Preparado y llevado a la cama</p>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this)">
+                    <h4>🤗 Abrazo Gigante</h4>
+                    <p>Válido por 1 hora entera</p>
+                </div>
+                <div class="coupon" onclick="redeemCoupon(this)">
+                    <h4>🎬 Película a elección</h4>
+                    <p>Con snacks incluidos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCard() {
+            const overlay = document.getElementById('welcomeOverlay');
+            overlay.classList.add('hidden');
+            
+            // Reproducir música
+            const music = document.getElementById('bgMusic');
+            music.play().catch(error => {
+                console.log("Reproducción automática bloqueada por el navegador:", error);
+            });
+
+            createPetals();
+        }
+
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            content.classList.toggle('active');
+            const arrow = button.querySelector('span:last-child');
+            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+        }
+
+        function redeemCoupon(coupon) {
+            coupon.style.background = '#d90429';
+            coupon.style.color = '#fff';
+            coupon.style.borderColor = '#b7091c';
+            coupon.innerHTML = '<h4>¡Canjeado! ❤️</h4><p style="color:#ffe5ec;">Ya tuyo para reclamar</p>';
+        }
+
+        function createPetals() {
+            const container = document.body;
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.top = -20 + 'px';
+                petal.style.width = (Math.random() * 15 + 10) + 'px';
+                petal.style.height = (Math.random() * 10 + 8) + 'px';
+                petal.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(petal);
+            }
+        }
+    </script>
+</body>
+</html>
